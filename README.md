@@ -10,10 +10,9 @@ Spécification technique détaillée :
 [`docs/SPEC_MCP_COTE_IVOIRE.md`](docs/SPEC_MCP_COTE_IVOIRE.md). Document
 d'architecture : [`docs/architecture.md`](docs/architecture.md).
 
-`docs/` contient la documentation produit. `behind-the-scenes/` contient les
-coulisses (usage de l'IA, script de présentation) — voir
-[`behind-the-scenes/ai_usage.md`](behind-the-scenes/ai_usage.md). Les notes de
-cadrage internes de l'assessment (`CONTEXT.md`) ne sont pas versionnées.
+`docs/` contient la documentation produit. `behind-the-scenes/` (coulisses :
+usage de l'IA, script de présentation, notes de cadrage) est local
+uniquement, non versionné.
 
 ---
 
@@ -223,5 +222,4 @@ cause exacte non creusée faute de temps. Utiliser directement l'URL avec
 slash final contourne le problème et est de toute façon plus robuste : certains
 proxys de PaaS gèrent mal les redirections.
 
-**Divulgation de l'usage de l'IA** : voir
-[`behind-the-scenes/ai_usage.md`](behind-the-scenes/ai_usage.md).
+**Divulgation de l'usage de l'IA** : fournie séparément (`behind-the-scenes/ai_usage.md`, non versionné).

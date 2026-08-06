@@ -6,9 +6,10 @@ node_modules/
 dist/
 .env
 
-# Notes de cadrage internes de l'assessment (barème, stratégie) — pas un
-# livrable, jamais poussées sur le repo public.
-behind-the-scenes/CONTEXT.md
+# Coulisses (notes de cadrage, usage IA, script de présentation...) — dossier
+# local uniquement, jamais poussé sur le repo public. docs/ ne garde que la
+# doc et les éléments à montrer.
+behind-the-scenes/
 
 # État interne de l'outil Claude Code, pas du contenu du projet.
 .claude/
