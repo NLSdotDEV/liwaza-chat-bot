@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+node_modules/
+dist/
+.env
+
+# Notes de cadrage internes de l'assessment (barème, stratégie) — pas un
+# livrable, jamais poussées sur le repo public.
+behind-the-scenes/CONTEXT.md
+
+# État interne de l'outil Claude Code, pas du contenu du projet.
+.claude/

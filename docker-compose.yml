@@ -1,0 +1,29 @@
+# Dev local, 2 services séparés avec hot-reload. En prod, backend/Dockerfile
+# build le frontend et le sert en statique depuis le même conteneur que
+# l'API — un seul service suffit alors (cf. docs/SPEC_MCP_COTE_IVOIRE.md §7).
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    env_file: backend/.env
+    volumes:
+      - ./backend/app:/app/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    image: node:20-slim
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host"
+    ports:
+      - "5173:5173"
+    environment:
+      # Le backend est un conteneur séparé, joignable par son nom de service
+      # ('backend'), pas par 127.0.0.1 — cf. vite.config.js.
+      - BACKEND_URL=http://backend:8000
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
