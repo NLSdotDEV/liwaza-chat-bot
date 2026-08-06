@@ -108,6 +108,34 @@ deux tournent dans des conteneurs séparés sur le réseau compose.
 
 ---
 
+## Déploiement (Render)
+
+Conteneur unique, tel que décrit dans `docs/architecture.md` §2. `render.yaml`
+à la racine est un Blueprint Render — la config du service (build Docker,
+health check, variables d'environnement) est versionnée, pas cliquée à la main :
+
+1. [Dashboard Render](https://dashboard.render.com) → **New** → **Blueprint** →
+   connecter le repo GitHub `NLSdotDEV/liwaza-chat-bot`.
+2. Render détecte `render.yaml` et propose le service `liwaza-chat-bot`
+   (Docker, contexte = racine du repo, `backend/Dockerfile`).
+3. Seule valeur à saisir manuellement : `GROQ_API_KEY` (marquée `sync: false`
+   dans le Blueprint — jamais stockée en clair dans le repo, Render la
+   demande à la création). `GROQ_MODEL` a déjà sa valeur par défaut.
+4. Déployer. Health check sur `/api/health`.
+
+**Tier gratuit** : le service s'endort après 15 min d'inactivité (cold start
+~30-50s au réveil suivant) — acceptable pour une démo/évaluation, à
+mentionner explicitement dans la vidéo plutôt qu'à laisser découvrir. Passer
+en tier payant supprime cette limite si besoin de disponibilité continue.
+
+**Pourquoi Render plutôt que Fly.io/Railway** : correspond à ce qui est déjà
+documenté dans `docs/architecture.md`, se configure entièrement depuis le
+dashboard (connexion GitHub) sans CLI ni authentification en ligne de
+commande à gérer, et le Blueprint rend la config reproductible sans clic
+manuel supplémentaire une fois le repo connecté.
+
+---
+
 ## Variables d'environnement
 
 | Variable | Obligatoire | Défaut | Notes |

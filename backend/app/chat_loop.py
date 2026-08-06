@@ -40,7 +40,10 @@ from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
 
 MODEL = os.environ["GROQ_MODEL"]  # identifiant vérifié sur console.groq.com/docs/models avant usage
-MCP_URL = os.environ.get("MCP_URL", "http://127.0.0.1:8000/mcp/")
+# Le port par défaut suit $PORT (pas 8000 en dur) : sur un PaaS comme Render,
+# $PORT est assigné dynamiquement, et c'est sur ce port que main.py écoute
+# réellement — un défaut figé à 8000 casserait l'auto-appel MCP en prod.
+MCP_URL = os.environ.get("MCP_URL", f"http://127.0.0.1:{os.environ.get('PORT', 8000)}/mcp/")
 MAX_TURNS = 6
 
 SYSTEM_PROMPT = """Tu es un assistant de données publiques sur la Côte d'Ivoire.
